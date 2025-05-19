@@ -18,7 +18,7 @@ class AuthFilter implements FilterInterface
         
         if (!$session->get('isLoggedIn')) {
             log_message('debug', 'AuthFilter: User is not logged in, redirecting to login page');
-            return redirect()->to('/login')->with('error', 'Please login first');
+            return redirect()->to('/login');
         } else {
             log_message('debug', 'AuthFilter: User is logged in as: ' . $session->get('username'));
         }
@@ -26,7 +26,6 @@ class AuthFilter implements FilterInterface
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Add logging for after filter execution
         log_message('debug', '==== AuthFilter: After filter executed ====');
     }
 }

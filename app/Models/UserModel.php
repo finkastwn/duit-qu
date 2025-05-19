@@ -11,4 +11,10 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields    = ['username', 'password'];
     protected $useTimestamps = true;
+
+    public function getUserByUsername(string $username)
+    {
+        return $this->where('username', $username)
+                    ->first();
+    }
 }

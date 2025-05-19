@@ -9,6 +9,15 @@ class Dashboard extends BaseController
 {
     public function index()
     {
-        return "Selamat datang di Dashboard, " . session('username');
+        $session = session();
+        
+        log_message('debug', 'Dashboard accessed. Session data: ' . json_encode($session->get()));
+        
+        if (!$session->get('isLoggedIn')) {
+            log_message('debug', 'User not logged in, redirecting to login page');
+            return redirect()->to('/login');
+        }
+
+        return view('dashboard');
     }
 }

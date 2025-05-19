@@ -124,3 +124,17 @@ _modules/*
 
 /results/
 /phpunit*.xml
+
+#-------------------------
+# SQL Files
+#-------------------------
+*.sql
+*.sql.gz
+*.sql.zip
+*.sql.bz2
+*.sql.bak
+*.sql.old
+database/*.sql
+database/backups/
+database/migrations/*.sql
+database/seeds/*.sql
