@@ -77,12 +77,35 @@
         margin-top: 20px !important;
         padding-top: 0 !important;
     }
+    .text-left {
+        text-align: left !important;
+        margin-left: 30px !important;
+    }
+    img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+    .user-section {
+        display: flex;
+        align-items: center;
+        margin: 20px 30px;
+        gap: 10px;
+    }
+    .user-section h3 {
+        margin: 0;
+        font-size: 18px;
+    }
 </style>
 <?php
 if (!isset($activeMenu)) $activeMenu = '';
 ?>
 <div class="sidebar">
     <h2 class="raleway-title">DuitQu</h2>
+    <div class="user-section">
+        <img src="/img/img_avatar.png" alt="avatar">
+        <h3>Hi, <?= session()->get('username') ?>!</h3>
+    </div>
     <div class="sidebar-content">
         <a href="/" class="<?= $activeMenu === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
         <a href="/transactions" class="<?= $activeMenu === 'transactions' ? 'active' : '' ?>">Transactions</a>
