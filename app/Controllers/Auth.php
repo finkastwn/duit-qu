@@ -69,4 +69,39 @@ class Auth extends BaseController
         
         return redirect()->to('/login');
     }
+
+    public function forgotPassword() 
+    {
+        return view('auth/forgot-password');
+    }
+
+    public function doForgotPassword()
+    {
+        $session = session();
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+        $password_confirmation = $this->request->getPost('password_confirmation');
+        
+        $user = $this->userModel->getUserByUsername($username);
+        if (!$user) {
+            $session->setFlashdata('error', 'User not found.');
+            return redirect()->to('/forgot-password');
+        }
+
+        if ($password !== $password_confirmation) {
+            $session->setFlashdata('error', 'Password do not match.');
+            return redirect()->to('/forgot-password');
+        }
+
+        if (password_verify($password, $user['password'])) {
+            $session->setFlashdata('error', "New password can't be the same as the current password.");
+            return redirect()->to('/forgot-password');
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->userModel->updateUserPassword($user['id'], $hashedPassword);
+
+        $session->setFlashdata('success', 'Password reset successful. Please login with your new password.');
+        return redirect()->to('/login');
+    }
 }
