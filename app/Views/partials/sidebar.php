@@ -104,7 +104,7 @@ if (!isset($activeMenu)) $activeMenu = '';
     <h2 class="raleway-title">DuitQu</h2>
     <div class="user-section">
         <img src="/img/img_avatar.png" alt="avatar">
-        <h3>Hi, <?= session()->get('username') ?>!</h3>
+        <h3>Hi, <?= session()->get('name') ?>!</h3>
     </div>
     <div class="sidebar-content">
         <a href="/" class="<?= $activeMenu === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
