@@ -77,3 +77,10 @@ defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7);     // invalid u
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8);       // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9);      // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125);    // highest automatically-assigned error code
+
+// Sidebar color constants for use in views
+if (!defined('MAIN_COLOR')) define('MAIN_COLOR', '#4e73df');
+if (!defined('MAIN_DARK_COLOR')) define('MAIN_DARK_COLOR', '#224abe');
+if (!defined('WHITE')) define('WHITE', '#fff');
+if (!defined('DANGER')) define('DANGER', '#dc3545');
+if (!defined('DANGER_DARK_COLOR')) define('DANGER_DARK_COLOR', '#c82333');
