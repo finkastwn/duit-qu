@@ -41,6 +41,9 @@
                                             <input type="text" class="form-control form-control-user" name="username" placeholder="Username" required value="<?= old('username') ?>">
                                         </div>
                                         <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" name="name" placeholder="Name" required value="<?= old('name') ?>">
+                                        </div>
+                                        <div class="form-group">
                                             <input type="email" class="form-control form-control-user" name="email" placeholder="Email" required value="<?= old('email') ?>">
                                         </div>
                                         <div class="form-group">

@@ -21,6 +21,7 @@ class Register extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $confirmPassword = $this->request->getPost('confirm_password');
+        $name = $this->request->getPost('name');
 
         // Validasi username/email unik
         if ($userModel->getUserByUsername($username)) {
@@ -40,6 +41,7 @@ class Register extends BaseController
         $userModel->save([
             'username' => $username,
             'email' => $email,
+            'name' => $name,
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
         $session->setFlashdata('success', 'Registration successfully please login.');

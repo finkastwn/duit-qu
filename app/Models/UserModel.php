@@ -9,7 +9,7 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['username', 'email', 'password'];
+    protected $allowedFields    = ['username', 'email', 'password', 'name'];
     protected $useTimestamps = true;
 
     public function getUserByUsername(string $username)
