@@ -11,3 +11,4 @@ $routes->post('/login', 'Auth::doLogin');
 $routes->get('/logout', 'Auth::logout', ['filter' => 'auth']);
 $routes->get('/forgot-password', 'Auth::forgotPassword');
 $routes->post('/forgot-password', 'Auth::doForgotPassword');
+$routes->get('/income-categories', 'IncomeCategories::index', ['filter' => 'auth']);
