@@ -89,3 +89,6 @@ if (!defined('WHITE')) define('WHITE', '#fff');
 if (!defined('BLACK')) define('BLACK', '#000000');
 if (!defined('DANGER')) define('DANGER', '#dc3545');
 if (!defined('DANGER_DARK_COLOR')) define('DANGER_DARK_COLOR', '#c82333');
+if (!defined('DARK_GRAY')) define('DARK_GRAY', '#5a5c69');
+if (!defined('GRAY')) define('GRAY', '#858796');
+if (!defined('LIGHT_GRAY')) define('LIGHT_GRAY', '#f1f3f5');
