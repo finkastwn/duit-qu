@@ -42,7 +42,6 @@
         background-color: <?= MAIN_DARK_COLOR; ?>;
     }
     .sidebar a.active {
-        border-bottom: 3px solid #fff;
         background-color: <?= MAIN_DARK_COLOR; ?>;          
     }
     .logout-btn {
