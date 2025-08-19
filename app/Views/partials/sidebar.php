@@ -48,7 +48,7 @@
         margin: 20px 20px 20px 20px;
         padding: 10px 20px;
         background-color: <?= DANGER; ?>;
-        color: white;
+        color: <?= WHITE; ?>;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -95,6 +95,49 @@
         margin: 0;
         font-size: 18px;
     }
+    
+    .dropdown {
+        position: relative;
+        display: block;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        left: 220px;
+        top: 0;
+        background-color: <?= MAIN_DARK_COLOR; ?>;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-content a {
+        padding: 12px 20px;
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: <?= MAIN_COLOR; ?>;
+    }
+    
+    .dropdown > a::after {
+        content: '>>';
+        float: right;
+        font-size: 12px;
+    }
 </style>
 <?php
 if (!isset($activeMenu)) $activeMenu = '';
@@ -107,8 +150,14 @@ if (!isset($activeMenu)) $activeMenu = '';
     </div>
     <div class="sidebar-content">
         <a href="/" class="<?= $activeMenu === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
-        <a href="/transactions" class="<?= $activeMenu === 'transactions' ? 'active' : '' ?>">Transactions</a>
-        <a href="/categories" class="<?= $activeMenu === 'categories' ? 'active' : '' ?>">Categories</a>
+        <div class="dropdown">
+            <a href="" class="<?= $activeMenu === 'categories' ? 'active' : '' ?>">Categories</a>
+            <div class="dropdown-content">
+                <a href="/income-categories">Income Category</a>
+                <a href="/invest-categories">Investment Category</a>
+                <a href="/spending-categories">Spending Category</a>
+            </div>
+        </div>
         <!-- Add more links as needed -->
     </div>
     <a href="/logout" class="logout-btn">Logout</a>

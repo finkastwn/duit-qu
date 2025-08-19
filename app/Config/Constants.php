@@ -81,6 +81,11 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125);    // highest a
 // Sidebar color constants for use in views
 if (!defined('MAIN_COLOR')) define('MAIN_COLOR', '#4e73df');
 if (!defined('MAIN_DARK_COLOR')) define('MAIN_DARK_COLOR', '#224abe');
+if (!defined('MAIN_LIGHT_COLOR')) define('MAIN_LIGHT_COLOR', '#8faaf1');
+if (!defined('MAIN_VERY_LIGHT_COLOR')) define('MAIN_VERY_LIGHT_COLOR', '#e3eafc');
+if (!defined('SECONDARY_COLOR')) define('SECONDARY_COLOR', '#336b9cc');
+if (!defined('VIOLET_ACCENT')) define('VIOLET_ACCENT', '#6f42c1');
 if (!defined('WHITE')) define('WHITE', '#fff');
+if (!defined('BLACK')) define('BLACK', '#000000');
 if (!defined('DANGER')) define('DANGER', '#dc3545');
 if (!defined('DANGER_DARK_COLOR')) define('DANGER_DARK_COLOR', '#c82333');

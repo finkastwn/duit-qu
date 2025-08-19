@@ -13,3 +13,4 @@ $routes->get('/forgot-password', 'Auth::forgotPassword');
 $routes->post('/forgot-password', 'Auth::doForgotPassword');
 $routes->get('/register', 'Register::index');
 $routes->post('/register', 'Register::doRegister');
+$routes->get('/income-categories', 'IncomeCategories::index', ['filter' => 'auth']);
