@@ -8,7 +8,6 @@ class IncomeCategories extends BaseController
 {
     public function index()
     {
-        // Mock data for income categories
         $data['incomeCategories'] = [
             [
                 'id' => 1,
