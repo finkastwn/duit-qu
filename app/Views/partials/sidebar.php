@@ -163,7 +163,7 @@ if (!isset($activeMenu)) $activeMenu = '';
         <div class="dropdown">
             <a href="" class="<?= $activeMenu === 'categories' ? 'active' : '' ?>">Categories</a>
             <div class="dropdown-content">
-                <a href="/income-categories">Income Category</a>
+                <a href="/income-categories">Income Categories</a>
                 <a href="/invest-categories">Investment Category</a>
                 <a href="/spending-categories">Spending Category</a>
             </div>

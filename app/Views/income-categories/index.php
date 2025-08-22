@@ -188,5 +188,7 @@
                 </table>
         </div>
     </div>
+    
+    <?php include(APPPATH . 'Views/income-categories/modal-create.php'); ?>
 </body>
 </html>
