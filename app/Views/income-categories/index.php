@@ -52,6 +52,28 @@
             width: 100%;
             border-collapse: collapse;
             color: <?= WHITE; ?>;
+            table-layout: fixed;
+        }
+        
+        .income-table th:nth-child(1),
+        .income-table td:nth-child(1) {
+            width: 80px;
+            text-align: center;
+            border-radius: 10px 0 0 0;
+            border-right: 1px solid <?= VIOLET_ACCENT; ?>;
+        }
+        
+        .income-table th:nth-child(2),
+        .income-table td:nth-child(2) {
+            width: auto;
+        }
+        
+        .income-table th:nth-child(3),
+        .income-table td:nth-child(3) {
+            width: 200px;
+            text-align: left;
+            border-left: 1px solid <?= VIOLET_ACCENT; ?>;
+            border-radius: 0 10px 0 0;
         }
         
         .income-table th {
@@ -59,14 +81,13 @@
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            border: 1px solid <?= VIOLET_ACCENT; ?>;
         }
         
         .income-table td {
             background-color:  <?= MAIN_VERY_LIGHT_COLOR; ?>;
             padding: 15px;
             color: <?= MAIN_DARK_COLOR; ?>;
-            border: 1px solid <?= VIOLET_ACCENT; ?>;
+            border-bottom: 1px solid <?= VIOLET_ACCENT; ?>;
         }
         
         .action-buttons {
