@@ -12,8 +12,3 @@ $routes->get('/logout', 'Auth::logout', ['filter' => 'auth']);
 $routes->get('/forgot-password', 'Auth::forgotPassword');
 $routes->post('/forgot-password', 'Auth::doForgotPassword');
 $routes->get('/income-categories', 'IncomeCategories::index', ['filter' => 'auth']);
-$routes->get('/income-categories/create', 'IncomeCategories::create', ['filter' => 'auth']);
-$routes->post('/income-categories/store', 'IncomeCategories::store', ['filter' => 'auth']);
-$routes->get('/income-categories/edit/(:num)', 'IncomeCategories::edit/$1', ['filter' => 'auth']);
-$routes->post('/income-categories/update/(:num)', 'IncomeCategories::update/$1', ['filter' => 'auth']);
-$routes->get('/income-categories/delete/(:num)', 'IncomeCategories::delete/$1', ['filter' => 'auth']);
