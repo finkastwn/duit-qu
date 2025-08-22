@@ -99,19 +99,25 @@
             padding: 6px 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
             text-decoration: none;
             display: inline-block;
             text-align: center;
             min-width: 60px;
         }
-        
+        .btn-edit {
+            color: <?= MAIN_DARK_COLOR; ?>;
+        }
+        .btn-delete {
+            color: <?= DANGER; ?>;
+        }
         .btn-edit:hover {
-            border: 2px solid <?= MAIN_DARK_COLOR; ?>;
+            background-color: <?= MAIN_DARK_COLOR; ?>;
+            color: <?= WHITE; ?>;
         }
         
         .btn-delete:hover {
-            border: 2px solid <?= DANGER_DARK_COLOR; ?>;
+            background-color: <?= DANGER_DARK_COLOR; ?>;
+            color: <?= WHITE; ?>;
         }
         
         .no-data {
