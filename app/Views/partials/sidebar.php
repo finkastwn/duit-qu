@@ -114,10 +114,10 @@
         display: none;             
         position: relative;        
         border-radius: 0 0 5px 5px;
-        width: 100%;               /* make it exactly as wide as the sidebar */
+        width: 100%;              
         box-shadow: none; 
-        margin: 0;                 /* remove margins that push it "offside" */
-        padding: 0;                /* control spacing with padding inside children */
+        margin: 0;                 
+        padding: 0;                
     }
     
     .dropdown:hover .dropdown-content {
@@ -168,7 +168,6 @@ if (!isset($activeMenu)) $activeMenu = '';
                 <a href="/spending-categories">Spending Category</a>
             </div>
         </div>
-        <a href="/" class="<?= $activeMenu === '' ? 'active' : '' ?>">Dashboard 2</a>
         <!-- Add more links as needed -->
     </div>
     <a href="/logout" class="logout-btn">Logout</a>
