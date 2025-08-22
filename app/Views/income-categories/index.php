@@ -97,8 +97,7 @@
         
         .btn-edit, .btn-delete {
             padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 12px;
             text-decoration: none;
@@ -107,22 +106,12 @@
             min-width: 60px;
         }
         
-        .btn-edit {
-            background-color: <?= MAIN_COLOR; ?>;
-            color: <?= WHITE; ?>;
-        }
-        
         .btn-edit:hover {
-            background-color: <?= MAIN_DARK_COLOR; ?>;
-        }
-        
-        .btn-delete {
-            background-color: <?= DANGER; ?>;
-            color: <?= WHITE; ?>;
+            border: 2px solid <?= MAIN_DARK_COLOR; ?>;
         }
         
         .btn-delete:hover {
-            background-color: <?= DANGER_DARK_COLOR; ?>;
+            border: 2px solid <?= DANGER_DARK_COLOR; ?>;
         }
         
         .no-data {
@@ -177,8 +166,8 @@
                                     <td><?= esc($category['category']) ?></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="/income-categories/edit/<?= $category['id'] ?>" class="btn-edit">Edit</a>
-                                            <a href="/income-categories/delete/<?= $category['id'] ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+                                            <a href="/income-categories/edit/<?= $category['id'] ?>" class="btn-edit">✏️ Edit</a>
+                                            <a href="/income-categories/delete/<?= $category['id'] ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this category?')">🗑️ Delete</a>
                                         </div>
                                     </td>
                                 </tr>
