@@ -19,6 +19,10 @@ class CreateUsersTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
