@@ -11,7 +11,7 @@
 <?php include(APPPATH . 'Views/partials/sidebar.php'); ?>
     <div class="main-content">
         <div class="welcome-text">
-            <h1>Welcome, <?= session()->get('username') ?>!</h1>
+            <h1>Welcome, <?= session()->get('name') ?>!</h1>
             <p>This is your dashboard.</p>
         </div>
     </div>
