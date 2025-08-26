@@ -3,46 +3,25 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\IncomeCategoryModel;
 
 class IncomeCategories extends BaseController
 {
+    protected $incomeCategoryModel;
+
+    public function __construct()
+    {
+        $this->incomeCategoryModel = new IncomeCategoryModel();
+    }
+
+    // 1. Get all categories for current user
     public function index()
     {
-        $data['incomeCategories'] = [
-            [
-                'id' => 1,
-                'category' => 'Salary'
-            ],
-            [
-                'id' => 2,
-                'category' => 'Freelance'
-            ],
-            [
-                'id' => 3,
-                'category' => 'Investment Returns'
-            ],
-            [
-                'id' => 4,
-                'category' => 'Business Income'
-            ],
-            [
-                'id' => 5,
-                'category' => 'Rental Income'
-            ],
-            [
-                'id' => 6,
-                'category' => 'Commission'
-            ],
-            [
-                'id' => 7,
-                'category' => 'Bonus'
-            ],
-            [
-                'id' => 8,
-                'category' => 'Side Hustle'
-            ]
-        ];
-        
+        $userId = session()->get('user_id');
+        $data['incomeCategories'] = $this->incomeCategoryModel
+                                        ->where('userId', $userId)
+                                        ->findAll();
+
         return view('income-categories/index', $data);
     }
 }
