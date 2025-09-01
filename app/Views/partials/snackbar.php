@@ -1,5 +1,9 @@
 <?php if (session()->getFlashdata('success')): ?>
-    <div id="snackbar" class="show"><?= session()->getFlashdata('success') ?></div>
+    <div id="snackbar" class="show success"><?= session()->getFlashdata('success') ?></div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div id="snackbar" class="show error"><?= session()->getFlashdata('error') ?></div>
 <?php endif; ?>
 
 <style>
@@ -17,6 +21,14 @@
     top: 30px;
     font-size: 17px;
     transform: translateX(-50%);
+}
+
+#snackbar.success {
+    background-color: #4CAF50;
+}
+
+#snackbar.error {
+    background-color: #f44336;
 }
 #snackbar.show {
     visibility: visible;
