@@ -17,12 +17,5 @@ class IncomeCategoryModel extends Model
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = '';
-    
-    public function categoryExistsForUser($categoryName, $userId)
-    {
-        return $this->where('category', $categoryName)
-                   ->where('userId', $userId)
-                   ->first() !== null;
-    }
 }
 

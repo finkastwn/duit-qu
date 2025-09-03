@@ -24,20 +24,32 @@ class IncomeCategories extends BaseController
         return view('income-categories/index', $data);
     }
 
+    public function isExist($categoryName, $userId, $excludeId = null)
+    {
+        $query = $this->incomeCategoryModel
+                     ->where('category', $categoryName)
+                     ->where('userId', $userId);
+        
+        if ($excludeId !== null) {
+            $query->where('id !=', $excludeId);
+        }
+        
+        $duplicateCheck = $query->first();
+        
+        return $duplicateCheck !== null;
+    }
+
     public function store()
     {
-        $session = session();
         $category = $this->request->getPost('category');
         $userId = session()->get('user_id');
         
         if (empty($category)) {
-            $session->setFlashdata('error', 'Category name is required.');
-            return redirect()->back();
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category name is required']);
         }
         
-        if ($this->incomeCategoryModel->categoryExistsForUser($category, $userId)) {
-            $session->setFlashdata('error', 'Category name already exists. Please choose a different name.');
-            return redirect()->back();
+        if ($this->isExist($category, $userId)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category name already exists. Please choose a different name']);
         }
         
         $userData = [
@@ -49,15 +61,19 @@ class IncomeCategories extends BaseController
             $result = $this->incomeCategoryModel->insert($userData);
             
             if ($result) {
-                $session->setFlashdata('success', 'Income category created successfully.');
-                return redirect()->to('/income-categories');
+                return $this->response->setJSON([
+                    'status' => 'success', 
+                    'message' => 'Income category created successfully',
+                    'data' => [
+                        'id' => $result,
+                        'category' => $category
+                    ]
+                ]);
             } else {
-                $session->setFlashdata('error', 'Failed to create income category. Validation errors occurred.');
-                return redirect()->back();
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create income category']);
             }
         } catch (\Exception $e) {
-            $session->setFlashdata('error', 'Failed to create income category. Please try again.');
-            return redirect()->back();
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to create income category. Please try again']);
         }
     }
     
@@ -96,13 +112,7 @@ class IncomeCategories extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Category name is required']);
         }
 
-        $duplicateCheck = $this->incomeCategoryModel
-                             ->where('category', $category)
-                             ->where('userId', $userId)
-                             ->where('id !=', $id)
-                             ->first();
-
-        if ($duplicateCheck) {
+        if ($this->isExist($category, $userId, $id)) {
             return $this->response->setJSON(['status' => 'error', 'message' => 'Category name already exists']);
         }
 

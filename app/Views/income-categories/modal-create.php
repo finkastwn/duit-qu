@@ -7,7 +7,7 @@
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
         
-        <form id="createForm" action="/income-categories/store" method="post">
+        <form id="createForm">
             <div class="form-group">
                 <input type="text" 
                        id="category" 
@@ -32,6 +32,66 @@
         document.getElementById('createModal').style.display = 'block';
     });
     
+    document.getElementById('createForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('category', document.getElementById('category').value);
+        
+        fetch('<?= base_url('income-categories/store') ?>', {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                '<?= csrf_token() ?>': '<?= csrf_hash() ?>'
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Add new row to table if there are existing categories
+                const tbody = document.querySelector('.income-table tbody');
+                const noDataRow = tbody.querySelector('.no-data-row');
+                
+                if (noDataRow) {
+                    // Replace no-data row with new category
+                    tbody.innerHTML = `
+                        <tr>
+                            <td>1</td>
+                            <td>${data.data.category}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/income-categories/edit/${data.data.id}" class="btn-edit">✏️ Edit</a>
+                                    <a href="/income-categories/delete/${data.data.id}" class="btn-delete">🗑️ Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    const rowCount = tbody.querySelectorAll('tr').length;
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td>${rowCount + 1}</td>
+                        <td>${data.data.category}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="/income-categories/edit/${data.data.id}" class="btn-edit">✏️ Edit</a>
+                                <a href="/income-categories/delete/${data.data.id}" class="btn-delete">🗑️ Delete</a>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(newRow);
+                }
+                
+                showSnackbar('Income category created successfully', 'success');
+                closeModal();
+            } else {
+                showSnackbar(data.message || 'Failed to create income category', 'error');
+            }
+        })
+        .catch(() => showSnackbar('Failed to create income category', 'error'));
+    });
+    
     function closeModal() {
         document.getElementById('createModal').style.display = 'none';
         document.getElementById('createForm').reset();
@@ -49,4 +109,21 @@
             closeModal();
         }
     });
+    
+    function showSnackbar(message, type = 'success') {
+        let snackbar = document.getElementById('snackbar');
+        
+        if (!snackbar) {
+            snackbar = document.createElement('div');
+            snackbar.id = 'snackbar';
+            document.body.appendChild(snackbar);
+        }
+        
+        snackbar.textContent = message;
+        snackbar.className = `show ${type}`;
+        
+        setTimeout(() => {
+            snackbar.className = snackbar.className.replace("show", "");
+        }, 3000);
+    }
 </script>
