@@ -37,15 +37,51 @@ document.getElementById('confirmDelete').addEventListener('click', function() {
     .then(data => {
         if(data.status === 'success'){
             document.querySelector(`.btn-delete[href$='${deleteId}']`).closest('tr').remove();
+            
+            const tbody = document.querySelector('.income-table tbody');
+            const remainingRows = tbody.querySelectorAll('tr:not(.no-data-row)');
+            
+            if (remainingRows.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="no-data-row">
+                        <td colspan="3" class="no-data-cell">
+                            <div class="no-data">
+                                <div class="no-data-icon">📊</div>
+                                <p>No data available</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            showSnackbar('Category deleted successfully', 'success');
+            
             closeDeleteModal();
         } else {
-            alert(data.message);
+            showSnackbar(data.message || 'Failed to delete category', 'error');
         }
     })
-    .catch(() => alert('Failed to delete category'));
+    .catch(() => showSnackbar('Failed to delete category', 'error'));
 });
 
 function closeDeleteModal() {
     document.getElementById('deleteModal').style.display = 'none';
+}
+
+function showSnackbar(message, type = 'success') {
+    let snackbar = document.getElementById('snackbar');
+    
+    if (!snackbar) {
+        snackbar = document.createElement('div');
+        snackbar.id = 'snackbar';
+        document.body.appendChild(snackbar);
+    }
+    
+    snackbar.textContent = message;
+    snackbar.className = `show ${type}`;
+    
+    setTimeout(() => {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
 }
 </script>

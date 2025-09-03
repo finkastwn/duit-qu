@@ -56,7 +56,9 @@
 window.onload = function() {
     var x = document.getElementById("snackbar");
     if (x) {
-        x.className = "show";
+        if (!x.className.includes("show")) {
+            x.className += " show";
+        }
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 };

@@ -163,7 +163,7 @@
                     </thead>
                     <tbody>
                         <?php if (empty($incomeCategories)): ?>
-                            <tr>
+                            <tr class="no-data-row">
                                 <td colspan="3" class="no-data-cell">
                                     <div class="no-data">
                                         <div class="no-data-icon">📊</div>
