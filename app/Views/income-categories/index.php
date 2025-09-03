@@ -132,6 +132,12 @@
             margin-bottom: 20px;
             opacity: 0.7;
         }
+    
+        .income-table td.no-data-cell {
+            border: none !important;
+            border-radius: 0 !important;
+            background-color: transparent !important;
+        }
     </style>
 </head>
 <body>
@@ -158,7 +164,7 @@
                     <tbody>
                         <?php if (empty($incomeCategories)): ?>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="3" class="no-data-cell">
                                     <div class="no-data">
                                         <div class="no-data-icon">📊</div>
                                         <p>No data available</p>
