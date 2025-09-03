@@ -191,6 +191,7 @@
     </div>
     
     <?php include(APPPATH . 'Views/income-categories/modal-create.php'); ?>
+    <?php include(APPPATH . 'Views/income-categories/modal-edit.php'); ?>
     <?php include(APPPATH . 'Views/income-categories/modal-delete.php'); ?>
     <?php include(APPPATH . 'Views/partials/snackbar.php'); ?>
 </body>

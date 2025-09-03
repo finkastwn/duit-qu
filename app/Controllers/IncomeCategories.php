@@ -61,6 +61,64 @@ class IncomeCategories extends BaseController
         }
     }
     
+    public function edit($id)
+    {
+        $userId = session()->get('user_id');
+        
+        $category = $this->incomeCategoryModel
+                        ->where('id', $id)
+                        ->where('userId', $userId)
+                        ->first();
+
+        if (!$category) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category not found']);
+        }
+
+        return $this->response->setJSON(['status' => 'success', 'data' => $category]);
+    }
+
+    public function update($id)
+    {
+        $session = session();
+        $category = $this->request->getPost('category');
+        $userId = session()->get('user_id');
+        
+        $existingCategory = $this->incomeCategoryModel
+                               ->where('id', $id)
+                               ->where('userId', $userId)
+                               ->first();
+
+        if (!$existingCategory) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category not found']);
+        }
+
+        if (empty($category)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category name is required']);
+        }
+
+        $duplicateCheck = $this->incomeCategoryModel
+                             ->where('category', $category)
+                             ->where('userId', $userId)
+                             ->where('id !=', $id)
+                             ->first();
+
+        if ($duplicateCheck) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category name already exists']);
+        }
+
+        try {
+            $result = $this->incomeCategoryModel->update($id, ['category' => $category]);
+            
+            if ($result) {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Category updated successfully']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update category']);
+            }
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to update category']);
+        }
+    }
+
     public function delete($id)
     {
         $session = session();
