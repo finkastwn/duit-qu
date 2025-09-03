@@ -60,4 +60,26 @@ class IncomeCategories extends BaseController
             return redirect()->back();
         }
     }
+    
+    public function delete($id)
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $category = $this->incomeCategoryModel
+                        ->where('id', $id)
+                        ->where('userId', $userId)
+                        ->first();
+
+        if (!$category) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Category not found']);
+        }
+
+        try {
+            $this->incomeCategoryModel->delete($id);
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Category deleted']);
+        } catch (\Exception $e) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to delete category']);
+        }
+    }
 }
