@@ -173,7 +173,7 @@
                                     <td>
                                         <div class="action-buttons">
                                             <a href="/income-categories/edit/<?= $category['id'] ?>" class="btn-edit">✏️ Edit</a>
-                                            <a href="/income-categories/delete/<?= $category['id'] ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this category?')">🗑️ Delete</a>
+                                            <a href="/income-categories/delete/<?= $category['id'] ?>" class="btn-delete">🗑️ Delete</a>
                                         </div>
                                     </td>
                                 </tr>
