@@ -9,7 +9,7 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['username', 'email', 'password', 'name'];
+    protected $allowedFields = ['username', 'name', 'email', 'password'];
     protected $useTimestamps = true;
 
     public function getUserByUsername(string $username)
@@ -19,17 +19,28 @@ class UserModel extends Model
             ->first();
     }
 
+    public function getUserByEmail(string $email)
+    {
+        return $this
+            ->where('email', $email)
+            ->first();
+    }
+
+    public function isUsernameExists(string $username): bool
+    {
+        return $this->where('username', $username)->countAllResults() > 0;
+    }
+
+    public function isEmailExists(string $email): bool
+    {
+        return $this->where('email', $email)->countAllResults() > 0;
+    }
+
     public function updateUserPassword(int $id, string $password)
     {
         $this->update($id, [
             'password' => $password, 
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-    }
-
-    public function getUserByEmail(string $email)
-    {
-        return $this->where('email', $email)
-                    ->first();
     }
 }

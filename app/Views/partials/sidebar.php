@@ -9,10 +9,11 @@
         left: 0;
         width: 220px;
         height: 100%;
-        background-color: <?= MAIN_COLOR; ?>;
-        color: <?= WHITE; ?>;
+        background-color: <?= WHITE; ?>;
+        color: <?= MAIN_DARK_COLOR; ?>;
         display: flex;
         flex-direction: column;
+        border-right: 0.1px outset <?= LIGHT_GRAY; ?>;
     }
     .sidebar-content {
         padding-top: 0;
@@ -31,25 +32,32 @@
         font-size: 1.5em;
         letter-spacing: 1px;
     }
-    .sidebar a {
+    .sidebar a:not(.logout-btn) {
         display: block;
-        color: #fff;
+        color: <?= MAIN_COLOR; ?>;
         padding: 15px 30px;
         text-decoration: none;
         transition: background 0.2s;
     }
-    .sidebar a:hover {
-        background-color: <?= MAIN_DARK_COLOR; ?>;
+    .sidebar > .sidebar-content > a:hover,
+    .sidebar > .sidebar-content > .dropdown > a:hover {
+        background-color: <?= MAIN_COLOR; ?>;
+        color: <?= WHITE; ?>;
+        border-radius: 20px;
+        margin: 0 10px;
     }
     .sidebar a.active {
-        border-bottom: 3px solid #fff;
-        background-color: <?= MAIN_DARK_COLOR; ?>;          
+        background-color: <?= MAIN_DARK_COLOR; ?>;
+        color: <?= WHITE; ?>;
+        border-radius: 20px 20px 20px 20px;
+        margin-right: 10px;
+        margin-left: 10px;
     }
     .logout-btn {
         margin: 20px 20px 20px 20px;
         padding: 10px 20px;
         background-color: <?= DANGER; ?>;
-        color: white;
+        color: <?= WHITE; ?>;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -60,6 +68,7 @@
     }
     .logout-btn:hover {
         background-color: <?= DANGER_DARK_COLOR; ?>;
+        color: <?= WHITE; ?>;
     }
     .main-content {
         margin-left: 220px;
@@ -96,6 +105,49 @@
         margin: 0;
         font-size: 18px;
     }
+    
+    .dropdown {
+        display: block;
+    }
+    
+    .dropdown-content {
+        display: none;             
+        position: relative;        
+        border-radius: 0 0 5px 5px;
+        width: 100%;              
+        box-shadow: none; 
+        margin: 0;                 
+        padding: 0;                
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-content a {
+        padding: 12px 20px;
+        display: block;
+        color: <?= MAIN_COLOR; ?> !important;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        margin: 10px;
+        border-radius: 20px      
+    }                       
+    
+    .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-content a:hover {
+        color: <?= MAIN_DARK_COLOR; ?> !important;
+        background-color: <?= LIGHT_GRAY; ?>;
+    }
+    
+    .dropdown > a::after {
+        content: '▼';
+        float: right;
+        font-size: 12px;
+    }
 </style>
 <?php
 if (!isset($activeMenu)) $activeMenu = '';
@@ -108,8 +160,14 @@ if (!isset($activeMenu)) $activeMenu = '';
     </div>
     <div class="sidebar-content">
         <a href="/" class="<?= $activeMenu === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
-        <a href="/transactions" class="<?= $activeMenu === 'transactions' ? 'active' : '' ?>">Transactions</a>
-        <a href="/categories" class="<?= $activeMenu === 'categories' ? 'active' : '' ?>">Categories</a>
+        <div class="dropdown">
+            <a href="" class="<?= $activeMenu === 'categories' ? 'active' : '' ?>">Categories</a>
+            <div class="dropdown-content">
+                <a href="/income-categories">Income Categories</a>
+                <a href="/invest-categories">Investment Category</a>
+                <a href="/spending-categories">Spending Category</a>
+            </div>
+        </div>
         <!-- Add more links as needed -->
     </div>
     <a href="/logout" class="logout-btn">Logout</a>
